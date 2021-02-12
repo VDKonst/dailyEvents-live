@@ -1,0 +1,162 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row">
+  <div style="margin-top: 3%;" class="span4 offset">
+    <h1>Профиль</h1>
+  </div>
+</div>
+<br>
+<div class="card">
+  <div class="row">
+    <div class="span4 offset1">
+      <div class="container-fluid">
+        <img  src="{{object.photo.url}}" class="profile-pic" >
+        <a  style="margin-left: 4%; margin-top: 5%;" class="btn btn-primary " href="{% url 'edit_account' request.user.pk %}"><i class="icon-cog"></i> редактировать</a>
+      </div>
+    </div>
+    <div class="span4">
+      <div class="row">
+        <div class="span2">
+          <h6 style="margin-top: 20%;" class="mb-0">логин</h6>
+        </div>
+        <div class="span2">
+          <h6 style="margin-top: 20%; color:black" >{{object.username}}</h6>
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="span2">
+          <h6>почта</h6>
+        </div>
+        <div class="span2">
+          <h6 style="color:black" >{{object.email}}</h6>
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="span2">
+          <h6>пол</h6>
+        </div>
+        <div class="span2">
+          <h6 style="color:black" >{{object.sex}}</h6>
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="span2">
+          <h6>веб-сайт</h6>
+        </div>
+        <div class="span2">
+          <h6 style="color:black" >{{object.vk_url}}</h6>
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="span2">
+          <h6>о себе</h6>
+        </div>
+        <div class="span2">
+          <h6 style="margin-bottom: 20%; margin-top: 5%; color:black" >{{object.about}}</h6>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div style="margin-top: 6%;" class="span10 offset">
+    <h1>Избранные места</h1>
+  </div>
+</div>
+<br>
+{%for place in places %}
+<div class="card">
+  <div class="row">
+    <div class="span4">
+      <div class="container-fluid">
+        <img  style="margin-bottom: 20%;" src="{{place.photo.url}}" class="event-pic" >     
+        </div>
+    </div>
+    <div class="span4 offset2">
+      <div class="row">
+        <div class="span2">
+          <h6 style="margin-top: 20%;">Название</h6>
+        </div>
+        <div class="span2">
+          <h6 style="margin-top: 20%; color:black" >{{place.name}}</h6>
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="span2">
+          <h6>город</h6>
+        </div>
+        <div class="span2">
+          <h6 style="color:black" >{{place.city.name}}</h6>
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="span2">
+          <h6>адрес</h6>
+        </div>
+        <div class="span2">
+          <h6 style="color:black" >{{place.address}}</h6>
+        </div>
+      </div>
+      <div class="row">
+        <div class="span2">
+          <a href="{{place.get_absolute_url}}" style=" margin-top: 20%;margin-right: 20%;margin-bottom: 40%;" class="btn btn-primary">подробнее</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+{% endfor %}
+
+<div class="row">
+  <div style="margin-top: 6%;" class="span10 offset">
+    <h1>отслеживаемые события</h1>
+  </div>
+</div>
+<br>
+{%for item in events %}
+<div class="card">
+  <div class="row">
+    <div class="span4">
+      <div class="container-fluid">
+        <img  style="margin-bottom: 20%;" src="{{item.photo.url}}" class="event-pic" >     
+        </div>
+    </div>
+    <div class="span4 offset2">
+      <div class="row">
+        <div class="span2">
+          <h6 style="margin-top: 20%;">Название</h6>
+        </div>
+        <div class="span2">
+          <h6 style="margin-top: 20%; color:black" >{{item.name}}</h6>
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="span2">
+          <h6>описание</h6>
+        </div>
+        <div class="span2">
+          <h6 style="color:black" >{{item.short_description}}</h6>
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="span2">
+          <a href="{{item.get_absolute_url}}" style=" margin-top: 20%;margin-right: 20%;margin-bottom: 40%;" class="btn btn-primary">подробнее</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+{% endfor %}
+{% endblock %}

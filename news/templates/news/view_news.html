@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+
+{%block content%}
+<div class="row">
+    <div style="margin-top: 3%;" class="span10 offset">
+        <h1>{{news.headline}}</h1>
+    </div>
+  </div>
+  <br>
+  <div class="card">
+    <div class="row">
+      <div class="span4">
+        <div class="container-fluid">
+          <img  src="{{news.photo.url}}" class="event-pic" >
+          {% if request.user.is_authenticated %}
+          <div class="container">
+              <div class="span2">
+          <form action="{%url 'add_like' news.slug%}" method="POST">
+              {%csrf_token%}
+              <button style=" margin-top: 20%;margin-left: 60%;" type="submit" class="btn btn-success">лайк</button>
+          </form>
+        </div>
+        <div class="span2">
+          <form action="{%url 'add_dislike' news.slug%}" method="POST">
+            {%csrf_token%}
+            <button style=" margin-top: 20%;" type="submit" class="btn btn-danger">дизлайк</button>
+        </form>
+    </div>
+    </div>
+          {%endif%}
+          </div>
+      </div>
+      <div class="span4 offset2">
+        <div class="row">
+          <div class="span2">
+            <h6 style="margin-top: 20%;">заголовок</h6>
+          </div>
+          <div class="span2">
+            <h6 style="margin-top: 20%; color:black" >{{news.headline}}</h6>
+          </div>
+        </div>
+        <hr>
+        <div class="row">
+          <div class="span2">
+            <h6>лайков</h6>
+          </div>
+          <div class="span2">
+            <h6 style="color:black" >{{news.likes}}</h6>
+          </div>
+        </div>
+        <hr>
+        <div class="row">
+          <div class="span2">
+            <h6>дизлайков</h6>
+          </div>
+          <div class="span2">
+            <h6 style="color:black" >{{news.dislikes}}</h6>
+          </div>
+        </div>
+        <hr>
+        <div class="row">
+          <div class="span2">
+            <h6>категория</h6>
+          </div>
+          <div class="span2">
+            <h6 style="margin-bottom: 20%; margin-top: 5%; color:black" >{{news.category}}</h6>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="container" style="margin-left: 15%;">
+        <div class="span1">
+          <h6>текст</h6>
+        </div>
+        <div class="span8">
+          <h6 style="margin-bottom: 10%; margin-top: 5%; color:black" >{{news.text}}</h6>
+        </div>
+      </div>
+    </div>
+  </div>
+  {%endblock%}

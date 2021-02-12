@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row">
+  <div style="margin-top: 3%;" class="span10 offset">
+    <h1>Подробная информация</h1>
+  </div>
+</div>
+<br>
+<div class="card">
+  <div class="row">
+    <div class="span4">
+      <div class="container-fluid">
+        <img  src="{{object.photo.url}}" class="event-pic" >
+        {% if request.user.is_authenticated %}
+        <form method="POST">
+            {%csrf_token%}
+            <button style=" margin-top: 5%;" type="submit" class="btn btn-primary"><i class=" icon-heart"></i> добавить в избранное</button>
+        </form>
+        {%endif%}
+        </div>
+    </div>
+    <div class="span4 offset2">
+      <div class="row">
+        <div class="span2">
+          <h6 style="margin-top: 20%;">Название</h6>
+        </div>
+        <div class="span2">
+          <h6 style="margin-top: 20%; color:black" >{{object.name}}</h6>
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="span2">
+          <h6>rating</h6>
+        </div>
+        <div class="span2">
+          <h6 style="color:black" >{{object.rating}}</h6>
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="span2">
+          <h6>в избранном у</h6>
+        </div>
+        <div class="span2">
+          <h6 style="color:black" >{{follows}}</h6>
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="span2">
+          <h6>описание</h6>
+        </div>
+        <div class="span4">
+          <h6 style="margin-bottom: 20%; margin-top: 5%; color:black" >{{object.description}}</h6>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<hr>
+{%for item in schedule%}
+<div class="card">
+    <div class="row">
+      <div class="span8 offset2">
+        <div class="row">
+          <div class="span2">
+            <h6 style="margin-top: 20%;">когда</h6>
+          </div>
+          <div class="span2">
+            <h6 style="margin-top: 20%; color:black" >{{item.date}}</h6>
+          </div>
+        </div>
+        <hr>
+        <div class="row">
+          <div class="span2">
+            <h6 >где</h6>
+          </div>
+          <div class="span2">
+            <h6 style="margin-bottom: 10%; margin-top: 2%; color:black" >{{item.place.name}}</h6>
+          </div>
+        </div>
+          </div>
+        </div>
+      </div>
+{%endfor%}
+{% endblock %}

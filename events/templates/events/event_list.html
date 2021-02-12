@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row">
+  <div style="margin-top: 3%;" class="span10 offset">
+    <h1>{{title}}</h1>
+  </div>
+</div>
+<hr>
+{% for object in object_list %}
+
+<div class="image-container">
+  <a style="text-decoration: none; color:white;" href='{{object.get_absolute_url}}'>
+  <img class="img-event" src="{{object.photo.url}}" alt="Norway">
+  <div class="text-block">
+    <h4>{{object.name}}</h4>
+    <p>{{object.short_description}}<br><a href='{{object.get_absolute_url}}' style=" color:white;">Подробнее</a></p>
+    
+  </a>
+  </div>
+</div>
+{% if object.pk != last_pk %}
+<hr>
+{%endif%}
+{% endfor %}
+{% endblock %}

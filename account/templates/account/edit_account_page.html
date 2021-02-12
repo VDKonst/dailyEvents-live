@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block content %}
+      <form class="form-horizontal offset2" enctype="multipart/form-data" method="POST">
+          {%csrf_token%}
+        <fieldset>
+          <legend class="offset">редактировать профиль</legend>
+        <div class="control-group">
+          <label class="control-label" for="{{ form.photo.id_for_label }}">{{form.photo.label}}</label>
+          <div class="controls">
+            {{form.photo}}
+            {% for error in form.photo.errors %}
+             <p class="help-block" style="color : rgb(182, 33, 33)">{{error}}</p> 
+              {% endfor %}
+          </div>
+        </div>
+          
+
+          <div class="control-group">
+            <label class="control-label" for="{{form.vk_url.id_for_label}}">{{form.vk_url.label}}</label>
+            <div class="controls">
+                {{form.vk_url}}
+              </div>
+          </div>
+
+          <div class="control-group">
+            <label class="control-label" for="{{form.about.id_for_label}}">{{form.about.label}}</label>
+            <div class="controls">
+              {{form.about}}
+              {% for error in form.about.errors %}
+               <p class="help-block" style="color : rgb(182, 33, 33)">{{error}}</p> 
+                {% endfor %}
+            </div>
+          </div>
+          <div class="control-group">
+            <label class="control-label" for="{{form.send_mail.id_for_label}}">{{form.send_mail.label}}</label>
+            <div class="controls">
+                {{form.send_mail}}
+              </div>
+          </div>
+         
+          <div class="form-actions" style="background-color:rgb(255, 255, 255)">
+            <button type="submit" class="btn btn-primary offset">save changes</button>
+          </div>
+        </fieldset>
+      </form>
+
+{% endblock %}

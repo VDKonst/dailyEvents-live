@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div  class="row">
+    <div class="span4 offset4" style="margin-top:5%">
+<form action="{%url 'add_news'%}" method="POST">
+{%csrf_token%}
+{{form.as_p}}
+<button style=" margin-top: 5%;margin-left: 15%;" type="submit" class="btn btn-primary">отправить заявку</button>
+</form>
+</div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row">
+    <div style="margin-top: 3%;" class="span10 offset">
+      <h1>{{title}}</h1>
+    </div>
+  </div>
+  <br>
+{%for item in schedule%}
+<div class="card">
+    <div class="row">
+      <div class="span8 offset2">
+        <div class="row">
+          <div class="span2">
+            <h6 style="margin-top: 20%;">когда</h6>
+          </div>
+          <div class="span2">
+            <h6 style="margin-top: 20%; color:black" >{{item.date}}</h6>
+          </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="span2">
+              <h6 style="margin-top: 20%;">где</h6>
+            </div>
+            <div class="span2">
+                <a href="{{item.place.get_absolute_url}}">
+              <h6 style="margin-top: 20%; color:black" >{{item.place.name}}</h6>
+            </a>
+            </div>
+          </div>
+        <hr>
+        <div class="row">
+          <div class="span2">
+            <h6 >что</h6>
+          </div>
+          <div class="span2">
+            <a href="{{item.event.get_absolute_url}}">
+            <h6 style="margin-bottom: 10%; margin-top: 2%; color:black" >{{item.event.name}}</h6>
+            </a>
+          </div>
+        </div>
+          </div>
+        </div>
+      </div>
+      <hr>
+{%endfor%}    
+
+{% endblock %}

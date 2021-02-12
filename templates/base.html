@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/my.css' %}" type="text/css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+  <div class="navbar">
+    <div class="navbar-inner">
+      <div class="container">
+        
+        <a class="brand" href="{%url 'index' %}">Daily events</a>
+        <div class="nav-collapse">
+          <form class="navbar-search pull-left" method="POST">
+            {%csrf_token%}
+            {{form.city_name}}
+            <datalist id="cities">
+            {% for city in cities %}
+            <option >
+                {{city.name}}
+            </option>
+            {% endfor %}>
+          </datalist>
+          
+          </form>
+          <ul class="nav pull-right">
+            {% if not request.user.is_authenticated %}
+            <li><a href="{%url 'login' %}">войти</a></li> 
+            <li><a href="{%url 'registration' %}">регистрация</a></li> 
+            {% else %}
+            <li class="divider-vertical"></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{request.user.get_username }} <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="{{request.user.get_absolute_url}}">Профиль</a></li>
+                <li><a href="{% url 'edit_account' request.user.pk %}">редактировать профиль</a></li>
+                <li><a href="{%url 'logout' %}">выйти</a></li>
+                {% endif %}
+              </ul>
+            </li>
+          </ul>
+        </div><!-- /.nav-collapse -->
+      </div>
+    </div><!-- /navbar-inner -->
+  </div>
+  
+  <div class="container-fluid">
+  <div class="row-fluid">
+
+        <div class="span2"><div  style="padding: 8px 0;">
+          <ul class="nav nav-list">
+            <li class="nav-header">мероприятия</li>
+            <li class="active"><a href="{%url 'films'%}">кино</a></li>
+            <li><a href="{%url 'concerts'%}">концерты</a></li>
+            <li><a href="{%url 'sport'%}">спорт</a></li>
+            <li><a href="{%url 'theatre-events'%}">театр</a></li>
+            <li><a href="{%url 'exhibitions'%}">выставки</a></li>
+            <li><a href="{%url 'various-events'%}">другие</a></li>
+            <li class="nav-header">места</li>
+            <li><a href="{%url 'cinema-theatres'%}">кинотеатры</a></li>
+            <li><a href="{%url 'concerthalls'%}">концертные залы</a></li>
+            <li><a href="{%url 'restaurants'%}">рестораны, кафе, бары</a></li>
+            <li><a href="{%url 'showrooms'%}">выставочные галереи</a></li>
+            <li><a href="{%url 'various-places'%}">другие</a></li>
+            <li><a href="{%url 'theatres'%}">театры</a></li>
+            <li class="divider"></li>
+            <li><a href="{%url 'add_news'%}">предложить новость</a></li>
+            <li><a href="{%url 'org'%}">стать организатором</a></li>
+            <li><a href="{%url 'owner'%}">стать владельцем</a></li>
+            <li><a href="{%url 'contacts'%}">контакты</a></li>
+            <li><a href="{%url 'help'%}">помощь</a></li>
+          </ul>
+        </div>
+        </div>
+  <div class="span8">
+    {%block content%}
+  
+    {%endblock%}
+
+ </div>
+ 
+    
+  </div>
+  <hr>
+  <footer>
+    <p class="pull-right"><a href="#">Back to top</a></p>
+    <p>© Konstantinov V. D. 2021 <br> <a href="{%url 'index'%}">главная</a> <a href="{%url 'help'%}">помощь</a> <a href="{%url 'contacts'%}">контакты</a></p>
+  </footer>
+</div>
+
+ 
+  
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script>
+$(document).ready(function() {
+  $('li.active').removeClass('active');
+  $('a[href="' + location.pathname + '"]').closest('li').addClass('active'); 
+});
+ </script>
+ <script>
+$('.carousel').carousel({
+  interval: 2000
+})
+ </script>
+</body>
+</html>
